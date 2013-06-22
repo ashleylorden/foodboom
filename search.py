@@ -12,14 +12,13 @@ def yelp_request(path, url_params, consumer_key, consumer_secret, token, token_s
     # Unsigned URL
     encoded_params = ''
 
-    print url_params
     if url_params:
         encoded_params = urllib.urlencode(url_params)
         if path == 'search':
             url = 'http://api.yelp.com/v2/search?%s' % encoded_params
         elif path == 'business':
             url = 'http://api.yelp.com/v2/business/%s' % (url_params['id'])
-        print 'URL: %s' % (url,)
+        #print 'URL: %s' % (url,)
 
     # Sign the URL
     consumer = oauth2.Consumer(consumer_key, consumer_secret)
