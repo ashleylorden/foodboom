@@ -4,16 +4,18 @@ class Restaurant:
     mobile_url = None
     categories = None
     rating = None
-    neighborhoods = None
+    address = None
+    city = None
 
-    def __init__(self, id=None, name=None, mobile_url=None, categories=None,
-                 rating=None, neighborhoods=None):
-        self.yelp_id = id
+    def __init__(self, yelp_id=None, name=None, mobile_url=None, categories=None,
+                 rating=None, address=None, city=None):
+        self.yelp_id = yelp_id
         self.name = name
         self.mobile_url = mobile_url
         self.categories = categories
         self.rating = rating
-        self.neighborhoods = neighborhoods
+        self.address = address
+        self.city = city
 
     def load_data(self, dictionary):
         if "id" in dictionary:
@@ -27,13 +29,15 @@ class Restaurant:
         if "rating" in dictionary:
             self.rating = dictionary["rating"]
         if "location" in dictionary:
-            if "neighborhoods" in dictionary["location"]:
-                self.neighborhoods = dictionary["location"]["neighborhoods"]
+            if "address" in dictionary["location"]:
+                self.address = dictionary["location"]["address"]
+            if "city" in dictionary["location"]:
+                self.city = dictionary["location"]["city"]
 
     def __str__(self):
         return """%s -- %s
         Rating: %s
         %s
-        %s
+        %s, %s
         %s""" % (self.yelp_id, self.name, self.rating, self.categories, 
-                 self.neighborhoods, self.mobile_url)
+                 self.address, self.city, self.mobile_url)
