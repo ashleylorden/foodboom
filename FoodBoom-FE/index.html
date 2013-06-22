@@ -10,18 +10,32 @@
   
   <!-- Extra Codiqa features -->
   <link rel="stylesheet" href="codiqa.ext.css">
-  
   <link rel="stylesheet" href="https://codiqa.com/view/1f688402/css">
   
   <!-- jQuery and jQuery Mobile -->
   <script src="https://d10ajoocuyu32n.cloudfront.net/jquery-1.9.1.min.js"></script>
   <script src="https://d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
 
+  <!--jQuery for AutoComplete -->
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+
   <!-- Extra Codiqa features -->
   <script src="https://d10ajoocuyu32n.cloudfront.net/codiqa.ext.js"></script>
-   
   <script src="https://codiqa.com/view/1f688402/js"></script>
   
+  <!--AutoComplete Script -->
+  <!--Need Available options in availRest variable -->
+  $(function() {
+    var availRest = [
+    "Nob Hill Grille",
+    "Lordens House"
+    ];
+    $( "#restSearch" ).autocomplete({
+      source: availRest
+    });
+  });
 </head>
 <body>
   <!-- Home -->
@@ -33,7 +47,7 @@
       </div>
       <div data-role="content">
           <div data-role="fieldcontain">
-              <input name="" id="searchinput2" placeholder="" value="" type="search">
+              <input name="" id="restSearch" placeholder="" value="" type="search">
           </div>
           <ul data-role="listview" data-divider-theme="b" data-inset="true">
               <li data-theme="c">
