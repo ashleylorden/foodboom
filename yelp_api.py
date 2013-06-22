@@ -2,6 +2,7 @@ from restaurant import Restaurant
 import ConfigParser
 from search import yelp_request
 import json
+import os
 
 
 class YelpAPI:
