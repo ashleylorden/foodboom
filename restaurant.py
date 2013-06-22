@@ -29,3 +29,11 @@ class Restaurant:
         if "location" in dictionary:
             if "neighborhoods" in dictionary["location"]:
                 self.neighborhoods = dictionary["location"]["neighborhoods"]
+
+    def __str__(self):
+        return """%s -- %s
+        Rating: %s
+        %s
+        %s
+        %s""" % (self.yelp_id, self.name, self.rating, self.categories, 
+                 self.neighborhoods, self.mobile_url)
