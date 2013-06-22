@@ -1,2 +1,2 @@
-<application android:icon="@drawable/icon.png" android:label="@string/FoodBoom" >
+<application android:icon="@drawable/drawable-ldpi.png" android:label="@string/FoodBoom" >
 </application> 
