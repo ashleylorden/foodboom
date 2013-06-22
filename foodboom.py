@@ -1,12 +1,11 @@
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, json
 
-import yelp_api, restaurant
+from yelp_api import YelpAPI as yelp
+from restaurant import Restaurant as restaurant
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-
-yelp = YelpAPI()
 
 def to_json(restaurant_list):
     list_to_return = []
