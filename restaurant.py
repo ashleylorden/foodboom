@@ -34,6 +34,12 @@ class Restaurant:
             if "city" in dictionary["location"]:
                 self.city = dictionary["location"]["city"]
 
+    def get_categories(self):
+        l = []
+        for category in self.categories:
+            l.append(category[0])
+        return ','.join(l)
+
     def __str__(self):
         return """%s -- %s
         Rating: %s
