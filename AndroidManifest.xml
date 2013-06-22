@@ -1,0 +1,2 @@
+<application android:icon="@drawable/icon.png" android:label="@string/FoodBoom" >
+</application> 

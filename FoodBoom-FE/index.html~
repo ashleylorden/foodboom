@@ -21,10 +21,10 @@
   <script src="https://codiqa.com/view/1f688402/js"></script>
   
   <!--AutoComplete Script -->
-  <!--Need Available options in availRest variable -->
-  <script> 
-$(document).ready(function(){
-	  $('ul').append('<li class="ui-screen-hidden"><a href="#">Sample</a></li>');
+  <!--Need Available options to fill ou tthe rest -->
+  <script>
+        $(document).ready(function(){
+	  $('ul').append('<li class="ui-screen-hidden"><a href="#page1">Olive Garden</a></li>');
 	  $('ul').listview('refresh');
 	});
   </script>
@@ -39,27 +39,27 @@ $(document).ready(function(){
       </div>
       <div data-role="content">
           <div data-role="fieldcontain">
-              <ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search Restaurants..." data-inset="true">
-              <li data-theme="c">
-                  <a href="#page1" data-transition="slide">
-                      Original Restaurant
+              <ul id="search" data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search Restaurants..." data-inset="true">
+              <li class="results" data-theme="c"> 
+                  <a href="#page1" data-transition="slide" onclick="document.getElementById('search').value='Nob Hill Grille';">
+                      Nob Hill Grille
                   </a>
               </li>
           </ul>
           <ul data-role="listview" data-divider-theme="b" data-inset="true">
               <li data-theme="c">
                   <a href="#page1" data-transition="slide">
-                      Blind Restaurant Rec 1
+                      The Lorden's
                   </a>
               </li>
               <li data-theme="c">
                   <a href="#page1" data-transition="slide">
-                      Blind Restaurant Rec 2
+                      Source
                   </a>
               </li>
               <li data-theme="c">
                   <a href="#page1" data-transition="slide">
-                      Blind Restaurant Rec 3
+                      Basil Thai
                   </a>
               </li>
           </ul>
