@@ -16,26 +16,18 @@
   <script src="https://d10ajoocuyu32n.cloudfront.net/jquery-1.9.1.min.js"></script>
   <script src="https://d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
 
-  <!--jQuery for AutoComplete -->
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
-
   <!-- Extra Codiqa features -->
   <script src="https://d10ajoocuyu32n.cloudfront.net/codiqa.ext.js"></script>
   <script src="https://codiqa.com/view/1f688402/js"></script>
   
   <!--AutoComplete Script -->
-  <!--Need Available options in availRest variable -->
-  $(function() {
-    var availRest = [
-    "Nob Hill Grille",
-    "Lordens House"
-    ];
-    $( "#restSearch" ).autocomplete({
-      source: availRest
-    });
-  });
+  <!--Need Available options in Filler Rest -->
+  <script> 
+        $(document).ready(function(){
+	  $('ul').append('<li class="ui-screen-hidden"><a href="#">Filler Rest</a></li>');
+	  $('ul').listview('refresh');
+	});
+  </script>
 </head>
 <body>
   <!-- Home -->
@@ -47,9 +39,7 @@
       </div>
       <div data-role="content">
           <div data-role="fieldcontain">
-              <input name="" id="restSearch" placeholder="" value="" type="search">
-          </div>
-          <ul data-role="listview" data-divider-theme="b" data-inset="true">
+              <ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search Restaurants..." data-inset="true">
               <li data-theme="c">
                   <a href="#page1" data-transition="slide">
                       Original Restaurant
@@ -59,17 +49,17 @@
           <ul data-role="listview" data-divider-theme="b" data-inset="true">
               <li data-theme="c">
                   <a href="#page1" data-transition="slide">
-                      Restaurant 1
+                      Blind Restaurant Rec 1
                   </a>
               </li>
               <li data-theme="c">
                   <a href="#page1" data-transition="slide">
-                      Restaurant 2
+                      Blind Restaurant Rec 2
                   </a>
               </li>
               <li data-theme="c">
                   <a href="#page1" data-transition="slide">
-                      Restaurant 3
+                      Blind Restaurant Rec 3
                   </a>
               </li>
           </ul>
