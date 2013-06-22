@@ -12,12 +12,16 @@ class YelpAPI:
     token_secret = ''
 
     def __init__(self):
-        config = ConfigParser.ConfigParser()
-        config.read("config.ini")
-        self.consumer_key = config.get("yelp", "consumer_key")
-        self.consumer_secret = config.get("yelp", "consumer_secret")
-        self.token = config.get("yelp", "token")
-        self.token_secret = config.get("yelp", "token_secret")
+#        config = ConfigParser.ConfigParser()
+#        config.read("config.ini")
+#        self.consumer_key = config.get("yelp", "consumer_key")
+#        self.consumer_secret = config.get("yelp", "consumer_secret")
+#        self.token = config.get("yelp", "token")
+#        self.token_secret = config.get("yelp", "token_secret")
+        self.consumer_key = os.environ['consumer_key']
+        self.consumer_secret = os.environ['consumer_secret']
+        self.token = os.environ['token']
+        self.token_secret = os.environ['token_secret']
 
     def search_restaurant(self, string):
         results = yelp_request(
