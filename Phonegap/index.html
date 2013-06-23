@@ -21,12 +21,12 @@
   <script src="https://codiqa.com/view/1f688402/js"></script>
   
   <!--AutoComplete Script -->
-  <!--Need Available options in Filler Rest -->
-  <script> 
+  <!--Need Available options to fill ou tthe rest -->
+  <script>
         $(document).ready(function(){
-	  $('ul').append('<li class="ui-screen-hidden"><a href="#">Filler Rest</a></li>');
-	  $('ul').listview('refresh');
-	});
+	       $('ul').append('<li class="ui-screen-hidden"><a href="#page1">Olive Garden</a></li>');
+	       $('ul').listview('refresh');
+	     });
   </script>
 </head>
 <body>
@@ -39,27 +39,17 @@
       </div>
       <div data-role="content">
           <div data-role="fieldcontain">
-              <ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search Restaurants..." data-inset="true">
-              <li data-theme="c">
+              <ul id="search" data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search Restaurants..." data-inset="true">
+              	<li class="results" data-theme="c"> 
                   <a href="#page1" data-transition="slide">
-                      Original Restaurant
+                      Nob Hill Grille
                   </a>
-              </li>
-          </ul>
-          <ul data-role="listview" data-divider-theme="b" data-inset="true">
+             	</li>
+               </ul>
+          <ul id="results_list" data-role="listview" data-divider-theme="b" data-inset="true">
               <li data-theme="c">
-                  <a href="#page1" data-transition="slide">
-                      Blind Restaurant Rec 1
-                  </a>
-              </li>
-              <li data-theme="c">
-                  <a href="#page1" data-transition="slide">
-                      Blind Restaurant Rec 2
-                  </a>
-              </li>
-              <li data-theme="c">
-                  <a href="#page1" data-transition="slide">
-                      Blind Restaurant Rec 3
+                  <a href="" data-transition="slide">
+                      The Lorden's
                   </a>
               </li>
           </ul>
