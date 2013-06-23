@@ -17,3 +17,9 @@
 .distance {
 	line-height: 35px;
 }
+
+#compass {
+    font-size: 2em;
+    padding: 5px;
+    margin-bottom: 1em;
+}
