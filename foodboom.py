@@ -1,5 +1,5 @@
 from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash, json, jsonify
+     abort, render_template, flash, json, jsonify, make_response
 
 from yelp_api import YelpAPI
 
@@ -23,7 +23,7 @@ def search(search_term=None):
     restaurants = []
     if search_term:
         restaurants = yelp.search_restaurant(search_term)
-    res = to_json(restaurants)
+    res = make_response(to_json(restaurants))
     res.headers['Access-Control-Allow-Origin'] = '*'
     return res
 
@@ -33,7 +33,9 @@ def similar(yelp_id=None):
     if yelp_id:
         selected_restaurant = yelp.get_restaurant(yelp_id)
         restaurants = yelp.search_similar_restaurants(selected_restaurant)
-    return to_json(restaurants)
+    res = make_response(to_json(restaurants))
+    res.headers['Access-Control-Allow-Origin'] = '*'
+    return res
 
 if __name__ == '__main__':
     app.run()
