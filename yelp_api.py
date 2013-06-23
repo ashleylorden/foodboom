@@ -30,7 +30,7 @@ class YelpAPI:
             {
                 'term': string,
                 'location': 'San Francisco',
-                'limit': 3
+                'limit': 5
             },
             self.consumer_key,
             self.consumer_secret,
