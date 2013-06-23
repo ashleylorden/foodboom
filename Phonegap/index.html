@@ -24,9 +24,9 @@
   <!--Need Available options to fill ou tthe rest -->
   <script>
         $(document).ready(function(){
-	  $('ul').append('<li class="ui-screen-hidden"><a href="#page1">Olive Garden</a></li>');
-	  $('ul').listview('refresh');
-	});
+	       $('ul').append('<li class="ui-screen-hidden"><a href="#page1">Olive Garden</a></li>');
+	       $('ul').listview('refresh');
+	     });
   </script>
 </head>
 <body>
@@ -40,26 +40,16 @@
       <div data-role="content">
           <div data-role="fieldcontain">
               <ul id="search" data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search Restaurants..." data-inset="true">
-              <li class="results" data-theme="c"> 
-                  <a href="#page1" data-transition="slide" onclick="document.getElementById('search').value='Nob Hill Grille';">
+              	<li class="results" data-theme="c"> 
+                  <a href="#page1" data-transition="slide">
                       Nob Hill Grille
                   </a>
-              </li>
-          </ul>
-          <ul data-role="listview" data-divider-theme="b" data-inset="true">
+             	</li>
+               </ul>
+          <ul id="results_list" data-role="listview" data-divider-theme="b" data-inset="true">
               <li data-theme="c">
-                  <a href="#page1" data-transition="slide">
+                  <a href="" data-transition="slide">
                       The Lorden's
-                  </a>
-              </li>
-              <li data-theme="c">
-                  <a href="#page1" data-transition="slide">
-                      Source
-                  </a>
-              </li>
-              <li data-theme="c">
-                  <a href="#page1" data-transition="slide">
-                      Basil Thai
                   </a>
               </li>
           </ul>
