@@ -23,7 +23,9 @@ def search(search_term=None):
     restaurants = []
     if search_term:
         restaurants = yelp.search_restaurant(search_term)
-    return to_json(restaurants)
+    res = to_json(restaurants)
+    res.headers['Access-Control-Allow-Origin'] = '*'
+    return res
 
 @app.route('/similar/<yelp_id>')
 def similar(yelp_id=None):
