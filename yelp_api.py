@@ -58,8 +58,11 @@ class YelpAPI:
         restaurant.load_data(result)
         return restaurant
 
-    def search_similar_restaurants(self, restaurant):
+    def search_similar_restaurants(self, restaurant, lat_lon=None):
         #  rest not closed, matching cats, limit 15
+        if not lat_lon:
+            lat_lon = '37.7872247,-122.39926'
+
         results = yelp_request(
             'search',
             {
@@ -68,7 +71,7 @@ class YelpAPI:
                 'limit': 15,
                 'category_filter': restaurant.get_categories().lower(),
                 'sort': 1,
-                'll': '37.78646,-122.440042'
+                'll': lat_lon
             },
             self.consumer_key,
             self.consumer_secret,
@@ -80,7 +83,7 @@ class YelpAPI:
         restaurants = []
         for result in results.get('businesses', None):
             if not result.get('is_closed') and \
-                result.get('id') != restaurant.yelp_id:
+                    result.get('id') != restaurant.yelp_id:
                 r = Restaurant()
                 r.load_data(result)
                 restaurants.append(r)
