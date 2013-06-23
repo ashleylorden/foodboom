@@ -59,10 +59,13 @@ class YelpAPI:
         restaurant.load_data(result)
         return restaurant
 
-    def search_similar_restaurants(self, restaurant, lat_lon=None):
+    def search_similar_restaurants(self, restaurant, lat_lon=None, bearing=None):
         #  rest not closed, matching cats, limit 15
         if not lat_lon:
             lat_lon = '37.7872247,-122.39926'
+        lat2, lon2 = pointRadialDistance(lat_lon.split(','))
+        print lat2
+        print lon2
 
         results = yelp_request(
             'search',
@@ -96,6 +99,40 @@ class YelpAPI:
         restaurants = restaurants[1:4]
 
         return restaurants
+
+
+rEarth = 6371.01 # Earth's average radius in km
+epsilon = 0.000001 # threshold for floating-point equality
+
+
+def deg2rad(angle):
+    return angle*pi/180
+
+
+def rad2deg(angle):
+    return angle*180/pi
+
+
+def pointRadialDistance(lat1, lon1, bearing, distance):
+    """
+    Return final coordinates (lat2,lon2) [in degrees] given initial coordinates
+    (lat1,lon1) [in degrees] and a bearing [in degrees] and distance [in km]
+    """
+    rlat1 = deg2rad(lat1)
+    rlon1 = deg2rad(lon1)
+    rbearing = deg2rad(bearing)
+    rdistance = distance / rEarth # normalize linear distance to radian angle
+
+    rlat = asin( sin(rlat1) * cos(rdistance) + cos(rlat1) * sin(rdistance) * cos(rbearing) )
+
+    if cos(rlat) == 0 or abs(cos(rlat)) < epsilon: # Endpoint a pole
+        rlon=rlon1
+    else:
+        rlon = ( (rlon1 - asin( sin(rbearing)* sin(rdistance) / cos(rlat) ) + pi ) % (2*pi) ) - pi
+
+    lat = rad2deg(rlat)
+    lon = rad2deg(rlon)
+    return (lat, lon)
 
 
 #y = YelpAPI()
