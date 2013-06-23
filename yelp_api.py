@@ -3,6 +3,7 @@ import ConfigParser
 from search import yelp_request
 import json
 import os
+from math import asin, cos, pi, sin
 
 
 class YelpAPI:
@@ -63,9 +64,10 @@ class YelpAPI:
         #  rest not closed, matching cats, limit 15
         if not lat_lon:
             lat_lon = '37.7872247,-122.39926'
-        lat2, lon2 = pointRadialDistance(lat_lon.split(','))
-        print lat2
-        print lon2
+        lat, lon = lat_lon.split(',')
+        if not bearing:
+            bearing = 0
+        lat2, lon2 = pointRadialDistance(lat, lon, bearing, 0.8)
 
         results = yelp_request(
             'search',
@@ -75,7 +77,8 @@ class YelpAPI:
                 'limit': 15,
                 'category_filter': restaurant.get_categories().lower(),
                 'sort': 1,
-                'll': lat_lon
+                'll': lat_lon,
+                'bounds': lat_lon + '|' + lat2 + ',' + lon2
             },
             self.consumer_key,
             self.consumer_secret,
@@ -106,11 +109,11 @@ epsilon = 0.000001 # threshold for floating-point equality
 
 
 def deg2rad(angle):
-    return angle*pi/180
+    return float(angle) * float(pi) / 180
 
 
 def rad2deg(angle):
-    return angle*180/pi
+    return float(angle) * 180 / float(pi)
 
 
 def pointRadialDistance(lat1, lon1, bearing, distance):

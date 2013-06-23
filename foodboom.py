@@ -44,13 +44,13 @@ def similar(yelp_id=None):
     return res
 
 
-@app.route('/similar/<yelp_id>/<lat_lon>')
-def similar(yelp_id=None, lat_lon=None):
+@app.route('/similar/<yelp_id>/<lat_lon>/<bearing>')
+def similar(yelp_id=None, lat_lon=None, bearing=None):
     restaurants = []
     if yelp_id:
         selected_restaurant = yelp.get_restaurant(yelp_id)
         restaurants = yelp.search_similar_restaurants(
-            selected_restaurant, lat_lon)
+            selected_restaurant, lat_lon, bearing)
     res = make_response(to_json(restaurants))
     #res.mimetype = 'application/json'
     res.headers['Access-Control-Allow-Origin'] = '*'
@@ -58,4 +58,4 @@ def similar(yelp_id=None, lat_lon=None):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
