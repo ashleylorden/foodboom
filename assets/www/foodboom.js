@@ -22,7 +22,7 @@ function search(term){
 function show_similar(yelp_id) {
     show_loading()
     var coords = lat + ',' + lon;
-    $.get("http://foodboom.herokuapp.com/similar/" + yelp_id + "/" + coords, function(data) {
+    $.get("http://foodboom.herokuapp.com/similar/" + yelp_id + "/" + coords + "/" + bearing, function(data) {
         restaurants = jQuery.parseJSON(data);
         $('#search').empty();
         for (var i=0; i<3; i++) {
@@ -67,6 +67,7 @@ var to;
 var term;
 var lat;
 var lon;
+var bearing;
 $(document).ready(function(){
     $('#search').parent().find('input').val('');
     $('#search').parent().find('input').focus();
@@ -80,6 +81,7 @@ $(document).ready(function(){
         }
     });
     $('body').on('click', 'a.search-result', function(){
+        navigator.compass.getCurrentHeading(onSuccess, onError);
         $('#search').parent().find('input').val($(this).text());
         // $('#search').parent().find('input').attr('readonly', 'readonly');
         show_similar($(this).attr('id'));
@@ -87,5 +89,23 @@ $(document).ready(function(){
 
     // Get location
     navigator.geolocation.getCurrentPosition(set_coords);
-    
+    //navigator.compass.getCurrentHeading(onSuccess, onError);
+    $('#compass').click(function(){
+        navigator.compass.getCurrentHeading(onSuccess, onError);
+    })
+        
 });
+
+// onSuccess: Get the current heading
+//
+function onSuccess(heading) {
+    bearing = heading.trueHeading;
+}
+
+// onError: Failed to get the heading
+//
+function onError() {
+    alert('onError!');
+}
+
+
