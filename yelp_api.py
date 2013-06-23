@@ -81,7 +81,7 @@ class YelpAPI:
                 self.token_secret
             )
         else:
-            lat1, lon1, lat2, lon2 = get_yelp_coordinates(lat, lon, bearing, 1)
+            lat1, lon1, lat2, lon2 = get_yelp_coordinates(lat, lon, bearing, 2)
             # lat2, lon2 = pointRadialDistance(lat, lon, bearing, 5.8)
             print "L1: %s" % lat_lon
             print "L2: %s,%s" % (lat2, lon2)
