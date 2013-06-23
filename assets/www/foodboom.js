@@ -28,30 +28,35 @@ function show_similar(yelp_id) {
     }
     $.get(url, function(data) {
         restaurants = jQuery.parseJSON(data);
-        $('#search').empty();
-        for (var i=0; i<3; i++) {
-            console.log(restaurants[i]);
-            $("#search").append(
-                '<li data-theme="b">' +
-                    '<a href="' + restaurants[i].mobile_url + 
-                        '" data-transition="slide">' + 
-                        '<span style="font-size:22px;">'+restaurants[i].name + '</span> ' +
-                        ' ' + '<span class="ui-li-count" style="font-size:21px;background-color:yellow;"> ' + restaurants[i].rating + '</span>' +
-                        '<p class="distance" style=font-size:14px;>' + Math.round((restaurants[i].distance)/100) + ' blocks away' + '</p>'+
-                        '<p style=font-size:14px;padding-top:-10px;>' + restaurants[i].address + '</p>' + '<p id="' + restaurants[i].yelp_id + '></p>'+ 
-                    '</a>' +
-                '</li>');
-/*
-                var cat_list = [];
-                for (c in restaurants[i].categories) {
-                    cat_list.push(c[0]);
-                    alert(c);
-                }
-                alert(cat_list);
-                $('#'+restaurants[i].yelp_id).append(cat_list.join());
-  
-*/
-            $('ul').listview('refresh');
+        if (restaurants.length == 0) {
+            alert('No results!');
+            hide_loading();
+        } else {
+            $('#search').empty();
+            for (var i=0; i<3; i++) {
+                console.log(restaurants[i]);
+                $("#search").append(
+                    '<li data-theme="b">' +
+                        '<a href="' + restaurants[i].mobile_url + 
+                            '" data-transition="slide">' + 
+                            '<span style="font-size:22px;">'+restaurants[i].name + '</span> ' +
+                            ' ' + '<span class="ui-li-count" style="font-size:21px;background-color:yellow;"> ' + restaurants[i].rating + '</span>' +
+                            '<p class="distance" style=font-size:14px;> '+ '</p>'+
+                            '<p style=font-size:14px;padding-top:-10px;>' + restaurants[i].address + '</p>' + '<p id="' + restaurants[i].yelp_id + '></p>'+ 
+                        '</a>' +
+                    '</li>');
+    /*
+                    var cat_list = [];
+                    for (c in restaurants[i].categories) {
+                        cat_list.push(c[0]);
+                        alert(c);
+                    }
+                    alert(cat_list);
+                    $('#'+restaurants[i].yelp_id).append(cat_list.join());
+      
+    */
+                $('ul').listview('refresh');
+            }
         }
         hide_loading();
         $('#page1').append('<div style="text-align:center"><button id="compass">Point</button></div>');
