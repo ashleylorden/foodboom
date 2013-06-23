@@ -15,5 +15,12 @@
 }
 
 .distance {
+
 	padding-top: 10px;
+}
+
+#compass {
+    font-size: 2em;
+    padding: 5px;
+    margin-bottom: 1em;
 }

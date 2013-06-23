@@ -54,6 +54,7 @@ function show_similar(yelp_id) {
             $('ul').listview('refresh');
         }
         hide_loading();
+        $('#page1').append('<div style="text-align:center"><button id="compass">Point</button></div>');
    });
 }
 
@@ -83,6 +84,8 @@ var term;
 var lat;
 var lon;
 var bearing;
+var yelp_id;
+
 $(document).ready(function(){
     $('#search').parent().find('input').val('');
     $('#search').parent().find('input').focus();
@@ -101,15 +104,18 @@ $(document).ready(function(){
         }
         $('#search').parent().find('input').val($(this).text());
         // $('#search').parent().find('input').attr('readonly', 'readonly');
+        yelp_id = $(this).attr('id');
         show_similar($(this).attr('id'));
     });
 
     // Get location
     navigator.geolocation.getCurrentPosition(set_coords);
     //navigator.compass.getCurrentHeading(onSuccess, onError);
-    $('#compass').click(function(){
+    $('body').on('click', '#compass', function(){
         navigator.compass.getCurrentHeading(onSuccess, onError);
-    })
+        show_similar(yelp_id);
+        hide_loading();
+    });
         
 });
 
