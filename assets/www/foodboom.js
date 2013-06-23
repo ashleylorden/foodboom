@@ -38,7 +38,7 @@ function show_similar(yelp_id) {
                         '<span style="font-size:22px;">'+restaurants[i].name + '</span> ' +
                         ' ' + '<span class="ui-li-count" style="font-size:21px;background-color:yellow;"> ' + restaurants[i].rating + '</span>' +
                         '<p class="distance" style=font-size:14px;>' + Math.round((restaurants[i].distance)/100) + ' blocks away' + '</p>'+
-                        '<p style=font-size:14px;margin-top:2px;>' + restaurants[i].address + '</p>' + '<p id="' + restaurants[i].yelp_id + '></p>'+ 
+                        '<p style=font-size:14px;padding-top:-10px;>' + restaurants[i].address + '</p>' + '<p id="' + restaurants[i].yelp_id + '></p>'+ 
                     '</a>' +
                 '</li>');
 /*
