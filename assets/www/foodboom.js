@@ -59,7 +59,9 @@ function show_similar(yelp_id) {
             }
         }
         hide_loading();
-        $('#page1').append('<div style="text-align:center"><button id="compass">Point</button></div>');
+        if($('#compass').length == 0){
+        	$('#page1').append('<div style="text-align:center"><button id="compass">Point</button></div>');
+        }
    });
 }
 
