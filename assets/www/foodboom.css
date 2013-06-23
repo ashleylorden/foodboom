@@ -1,3 +1,9 @@
 .address {
     color: #AAA;
 }
+
+#intro-text {
+    width: 80%;
+    margin: 50px auto 0;
+    font-size: 1.7em;
+}

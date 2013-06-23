@@ -71,6 +71,7 @@ $(document).ready(function(){
     $('#search').parent().find('input').val('');
     $('#search').parent().find('input').focus();
     $('#search').parent().find('input').keyup(function(){
+        $('#intro-text').hide();
         if($(this).val().length > 2 && term != $(this).val()){
             hide_loading();
             window.clearTimeout(to);
