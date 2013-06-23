@@ -6,6 +6,7 @@ class Restaurant:
     rating = None
     address = None
     city = None
+    distance = None
 
     def __init__(self, yelp_id=None, name=None, mobile_url=None, categories=None,
                  rating=None, address=None, city=None):
@@ -33,6 +34,8 @@ class Restaurant:
                 self.address = dictionary["location"]["address"]
             if "city" in dictionary["location"]:
                 self.city = dictionary["location"]["city"]
+        if "distance" in dictionary:
+            self.distance = dictionary["distance"]
 
     def get_categories(self):
         l = []

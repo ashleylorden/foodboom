@@ -64,11 +64,11 @@ class YelpAPI:
             'search',
             {
                 'term': 'restaurant',
-                'location': '%s, %s' % (restaurant.address, restaurant.city),
+                # 'location': '%s, %s' % (restaurant.address, restaurant.city),
                 'limit': 15,
                 'category_filter': restaurant.get_categories().lower(),
                 'sort': 1,
-                'cll': '37.78646,-122.4400427'
+                'll': '37.78646,-122.440042'
             },
             self.consumer_key,
             self.consumer_secret,
@@ -79,7 +79,8 @@ class YelpAPI:
         # Put them on a list except the closed ones
         restaurants = []
         for result in results.get('businesses', None):
-            if not result.get('is_closed'):
+            if not result.get('is_closed') and \
+                result.get('id') != restaurant.yelp_id:
                 r = Restaurant()
                 r.load_data(result)
                 restaurants.append(r)
