@@ -66,28 +66,44 @@ class YelpAPI:
             lat_lon = '37.7872247,-122.39926'
         lat, lon = lat_lon.split(',')
         if not bearing:
-            bearing = 0
-        lat2, lon2 = pointRadialDistance(lat, lon, bearing, 0.8)
-
-        results = yelp_request(
-            'search',
-            {
-                'term': 'restaurant',
-                # 'location': '%s, %s' % (restaurant.address, restaurant.city),
-                'limit': 15,
-                'category_filter': restaurant.get_categories().lower(),
-                'sort': 1,
-                'll': lat_lon,
-                'bounds': lat_lon + '|' + lat2 + ',' + lon2
-            },
-            self.consumer_key,
-            self.consumer_secret,
-            self.token,
-            self.token_secret
-        )
+            results = yelp_request(
+                'search',
+                {
+                    'term': 'restaurant',
+                    'limit': 15,
+                    'category_filter': restaurant.get_categories().lower(),
+                    'sort': 1,
+                    'll': lat_lon,
+                },
+                self.consumer_key,
+                self.consumer_secret,
+                self.token,
+                self.token_secret
+            )
+        else:
+            lat1, lon1, lat2, lon2 = get_yelp_coordinates(lat, lon, bearing, 1)
+            # lat2, lon2 = pointRadialDistance(lat, lon, bearing, 5.8)
+            print "L1: %s" % lat_lon
+            print "L2: %s,%s" % (lat2, lon2)
+            results = yelp_request(
+                'search',
+                {
+                    'term': 'restaurant',
+                    'limit': 15,
+                    'category_filter': restaurant.get_categories().lower(),
+                    'sort': 1,
+                    'bounds': "%s,%s|%s,%s" % (lat1, lon1, lat2 ,lon2)
+                },
+                self.consumer_key,
+                self.consumer_secret,
+                self.token,
+                self.token_secret
+            )
 
         # Put them on a list except the closed ones
         restaurants = []
+        if not results.get('businesses'):
+            return []
         for result in results.get('businesses', None):
             if not result.get('is_closed') and \
                     result.get('id') != restaurant.yelp_id:
@@ -102,6 +118,14 @@ class YelpAPI:
         restaurants = restaurants[1:4]
 
         return restaurants
+
+def get_yelp_coordinates(lat, lon, bearing, distance):
+    # Get coordinates of half the distance going to bearing = center
+    distance = float(distance) / 2
+    center_lat, center_lon = pointRadialDistance(lat, lon, bearing, distance)
+    lat1, lon1 = pointRadialDistance(center_lat, center_lon, 135, distance)
+    lat2, lon2 = pointRadialDistance(center_lat, center_lon, 315, distance)
+    return lat1, lon1, lat2, lon2
 
 
 rEarth = 6371.01 # Earth's average radius in km
