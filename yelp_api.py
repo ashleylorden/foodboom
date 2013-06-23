@@ -30,6 +30,7 @@ class YelpAPI:
             {
                 'term': string,
                 'location': 'San Francisco',
+                'category_filter': 'restaurants',
                 'limit': 5
             },
             self.consumer_key,
