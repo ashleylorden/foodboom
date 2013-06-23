@@ -114,6 +114,7 @@ $(document).ready(function(){
     $('body').on('click', '#compass', function(){
         navigator.compass.getCurrentHeading(onSuccess, onError);
         show_similar(yelp_id);
+        hide_loading();
     });
         
 });
