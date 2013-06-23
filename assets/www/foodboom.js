@@ -22,7 +22,11 @@ function search(term){
 function show_similar(yelp_id) {
     show_loading()
     var coords = lat + ',' + lon;
-    $.get("http://foodboom.herokuapp.com/similar/" + yelp_id + "/" + coords + "/" + bearing, function(data) {
+    var url ="http://foodboom.herokuapp.com/similar/" + yelp_id + "/" + coords;
+    if (bearing != undefined) {
+        url += '/' + bearing;
+    }
+    $.get(url, function(data) {
         restaurants = jQuery.parseJSON(data);
         $('#search').empty();
         for (var i=0; i<3; i++) {
@@ -92,7 +96,9 @@ $(document).ready(function(){
         }
     });
     $('body').on('click', 'a.search-result', function(){
-        navigator.compass.getCurrentHeading(onSuccess, onError);
+        if (navigator.compass != undefined) {
+            navigator.compass.getCurrentHeading(onSuccess, onError);
+        }
         $('#search').parent().find('input').val($(this).text());
         // $('#search').parent().find('input').attr('readonly', 'readonly');
         show_similar($(this).attr('id'));
