@@ -27,7 +27,7 @@ def search(search_term=None):
     if search_term:
         restaurants = yelp.search_restaurant(search_term)
     res = make_response(to_json(restaurants))
-    res.mimetype = 'application/json'
+    #res.mimetype = 'application/json'
     res.headers['Access-Control-Allow-Origin'] = '*'
     return res
 
@@ -39,7 +39,7 @@ def similar(yelp_id=None):
         selected_restaurant = yelp.get_restaurant(yelp_id)
         restaurants = yelp.search_similar_restaurants(selected_restaurant)
     res = make_response(to_json(restaurants))
-    res.mimetype = 'application/json'
+    #res.mimetype = 'application/json'
     res.headers['Access-Control-Allow-Origin'] = '*'
     return res
 
@@ -52,7 +52,7 @@ def similar(yelp_id=None, lat_lon=None):
         restaurants = yelp.search_similar_restaurants(
             selected_restaurant, lat_lon)
     res = make_response(to_json(restaurants))
-    res.mimetype = 'application/json'
+    #res.mimetype = 'application/json'
     res.headers['Access-Control-Allow-Origin'] = '*'
     return res
 
