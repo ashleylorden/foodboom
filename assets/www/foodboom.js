@@ -1,4 +1,5 @@
 function search(term){
+    show_loading();
     var results = $.get(
         'http://foodboom.herokuapp.com/search/' + term,
         function(data){ 
@@ -14,12 +15,14 @@ function search(term){
                 );
             }
             $('ul').listview('refresh');
+            hide_loading();
         });
 }
 
 function show_similar(yelp_id) {
-    
-    $.get("http://foodboom.herokuapp.com/similar/" + yelp_id, function(data) {
+    show_loading()
+    var coords = lat + ',' + lon;
+    $.get("http://foodboom.herokuapp.com/similar/" + yelp_id + "/" + coords, function(data) {
         restaurants = jQuery.parseJSON(data);
         $('#search').empty();
         for (var i=0; i<3; i++) {
@@ -34,17 +37,41 @@ function show_similar(yelp_id) {
                 '</li>'
             );
             $('ul').listview('refresh');
-       }
+        }
+        hide_loading();
    });
 }
+
+function set_coords(position){
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
+}
+
+function show_loading(){
+    $.mobile.loading( 'show', {
+        text: 'Searching',
+        textVisible: true,
+        theme: 'b',
+        html: ""
+    });
+}
+
+function hide_loading(){
+    $.mobile.loading( 'hide', {
+    });
+}
+
 
 
 var to;
 var term;
+var lat;
+var lon;
 $(document).ready(function(){
     $('#search').parent().find('input').val('');
     $('#search').parent().find('input').keyup(function(){
         if($(this).val().length > 2 && term != $(this).val()){
+            hide_loading();
             window.clearTimeout(to);
             term = $(this).val();
             to = setTimeout(function(){ search(term) }, 700);
@@ -55,5 +82,8 @@ $(document).ready(function(){
         // $('#search').parent().find('input').attr('readonly', 'readonly');
         show_similar($(this).attr('id'));
     });
+
+    // Get location
+    navigator.geolocation.getCurrentPosition(set_coords);
     
 });
