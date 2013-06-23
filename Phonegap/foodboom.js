@@ -18,8 +18,8 @@ function search(term){
 }
 
 function show_similar(yelp_id) {
-    
-    $.get("http://foodboom.herokuapp.com/similar/" + yelp_id, function(data) {
+    var coords = lat + ',' + lon;
+    $.get("http://foodboom.herokuapp.com/similar/" + yelp_id + "/" + coords, function(data) {
         restaurants = jQuery.parseJSON(data);
         $('#search').empty();
         for (var i=0; i<3; i++) {
@@ -38,9 +38,16 @@ function show_similar(yelp_id) {
    });
 }
 
+function set_coords(position){
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
+}
+
 
 var to;
 var term;
+var lat;
+var lon;
 $(document).ready(function(){
     $('#search').parent().find('input').val('');
     $('#search').parent().find('input').keyup(function(){
@@ -55,5 +62,8 @@ $(document).ready(function(){
         // $('#search').parent().find('input').attr('readonly', 'readonly');
         show_similar($(this).attr('id'));
     });
+
+    // Get location
+    navigator.geolocation.getCurrentPosition(set_coords);
     
 });
